@@ -1,7 +1,10 @@
 import multer from 'multer';
+import path from 'path';
+
 import { Request, Response, Router } from 'express';
 
 import CheckUploadPodcastService from '../services/CheckUploadPodcastService';
+import GCPUploadPodcastService from '../services/GCPUploadPodcastService';
 
 import uploadConfig from '../config/upload';
 
@@ -18,7 +21,21 @@ podcastRouter.patch(
       const audioFile = await checkUploadPodcast.execute({
         audioFileName: filename,
       });
-      return audioFile ? response.sendStatus(200) : response.sendStatus(500);
+
+      if (audioFile) {
+        const gcpUploadPodcast = new GCPUploadPodcastService();
+        const audioFilePath = path.resolve(
+          __dirname,
+          '..',
+          '..',
+          'tmp',
+          filename,
+        );
+        const uploadFile = gcpUploadPodcast.execute({ audioFilePath });
+        return uploadFile ? response.sendStatus(200) : response.sendStatus(500);
+      }
+
+      return response.sendStatus(500);
     } catch (error) {
       return response.sendStatus(500);
     }
