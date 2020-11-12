@@ -5,7 +5,7 @@ interface Request {
 }
 
 class GCPUploadPodcastService {
-  public async execute({ audioFilePath }: Request): Promise<any> {
+  public async execute({ audioFilePath }: Request): Promise<number> {
     const bucketName = 'podcast-translator-bucket';
     const filename = audioFilePath;
     const storage = new Storage();

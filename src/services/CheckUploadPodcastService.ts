@@ -8,10 +8,10 @@ interface Request {
 }
 
 class CheckUploadPodcastService {
-  public async execute({ audioFileName }: Request): Promise<any> {
+  public async execute({ audioFileName }: Request): Promise<number> {
     const podcastFilePath = path.join(uploadConfig.directory, audioFileName);
     const podcastFileExists = await fs.promises.stat(podcastFilePath);
-    return podcastFileExists;
+    return podcastFileExists ? 200 : 500;
   }
 }
 
