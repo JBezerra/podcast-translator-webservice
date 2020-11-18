@@ -5,7 +5,7 @@ import { Request, Response, Router } from 'express';
 
 import CheckPodcastFileService from '../services/CheckPodcastFileService';
 import GCPUploadPodcastService from '../services/GCPUploadPodcastService';
-import QueueManagerService from '../services/QueueService';
+import QueueService from '../services/QueueService';
 
 import uploadConfig from '../config/upload';
 
@@ -44,9 +44,12 @@ podcastRouter.patch(
 );
 
 podcastRouter.get('/', (request: Request, response: Response) => {
-  QueueManagerService.add('GCPSpeechToText', {
+  QueueService.add('GCPSpeechToText', {
     gcpBucketFileUrl: 'gs://podcast-translator-bucket/audio-teste.wav',
   });
+  // QueueService.add('GCPTranslate', {
+  //   originalText: 'Olá meu nome é José',
+  // });
   response.sendStatus(200);
 });
 

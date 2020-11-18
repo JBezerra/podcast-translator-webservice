@@ -1,40 +1,23 @@
-import speech from '@google-cloud/speech';
+import Translate from '@google-cloud/translate';
 import gcpCredentials from '../config/gcp';
 
 interface Request {
-  data: { gcpBucketFileUrl: string };
+  data: { originalText: string };
 }
 
 export default {
-  key: 'GCPSpeechToText',
+  key: 'GCPTranslate',
   async execute({ data }: Request): any {
-    const { gcpBucketFileUrl } = data;
-    const client = new speech.SpeechClient({
+    const { originalText } = data;
+    console.log('GCPTranslate running...');
+    const translate = new Translate.v2.Translate({
       credentials: gcpCredentials,
     });
-    const audio = {
-      uri: gcpBucketFileUrl,
-    };
-    // Audio .wav, mono, 44100 Hertz
-    const config = {
-      encoding: 'LINEAR16',
-      sampleRateHertz: 44100,
-      audioChannelCount: 1,
-      enableAutomaticPunctuation: true,
-      languageCode: 'pt-BR',
-    };
-    const request = {
-      audio,
-      config,
-    };
+    const text = originalText;
+    const target = 'en';
 
-    // Detects speech in the audio file
-    const [operation] = await client.longRunningRecognize(request);
-    const [response] = await operation.promise();
-    const transcription = response.results
-      ?.map(result => result.alternatives[0].transcript)
-      .join('\n');
-    console.log(`Transcription: ${transcription}`);
-    return transcription;
+    const [translation] = await translate.translate(text, target);
+    console.log(`Translation: ${translation}`);
+    return translation;
   },
 };

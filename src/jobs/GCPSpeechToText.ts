@@ -1,4 +1,7 @@
 import speech from '@google-cloud/speech';
+
+import QueueService from '../services/QueueService';
+
 import gcpCredentials from '../config/gcp';
 
 interface Request {
@@ -34,7 +37,13 @@ export default {
     const transcription = response.results
       ?.map(result => result.alternatives[0].transcript)
       .join('\n');
+
     console.log(`Transcription: ${transcription}`);
+
+    QueueService.add('GCPTranslate', {
+      originalText: transcription,
+    });
+
     return transcription;
   },
 };
