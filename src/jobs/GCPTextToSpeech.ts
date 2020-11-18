@@ -26,7 +26,7 @@ export default {
 
     const [response] = await client.synthesizeSpeech(request);
     const writeFile = util.promisify(fs.writeFile);
-    await writeFile('output.mp3', response.audioContent, 'binary');
+    await writeFile('./tmp/output/output.mp3', response.audioContent, 'binary');
     console.log('Audio content written to file: output.mp3');
   },
 };
