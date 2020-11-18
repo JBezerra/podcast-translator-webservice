@@ -7,7 +7,7 @@ interface Request {
   audioFileName: string;
 }
 
-class CheckUploadPodcastService {
+class CheckPodcastFileService {
   public async execute({ audioFileName }: Request): Promise<number> {
     const podcastFilePath = path.join(uploadConfig.directory, audioFileName);
     const podcastFileExists = await fs.promises.stat(podcastFilePath);
@@ -15,4 +15,4 @@ class CheckUploadPodcastService {
   }
 }
 
-export default CheckUploadPodcastService;
+export default CheckPodcastFileService;

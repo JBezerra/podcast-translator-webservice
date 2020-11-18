@@ -3,7 +3,7 @@ import path from 'path';
 
 import { Request, Response, Router } from 'express';
 
-import CheckUploadPodcastService from '../services/CheckUploadPodcastService';
+import CheckPodcastFileService from '../services/CheckPodcastFileService';
 import GCPUploadPodcastService from '../services/GCPUploadPodcastService';
 
 import uploadConfig from '../config/upload';
@@ -17,7 +17,7 @@ podcastRouter.patch(
   async (request: Request, response: Response) => {
     try {
       const { filename } = request.file;
-      const checkUploadPodcast = new CheckUploadPodcastService();
+      const checkUploadPodcast = new CheckPodcastFileService();
       const audioFile = await checkUploadPodcast.execute({
         audioFileName: filename,
       });
