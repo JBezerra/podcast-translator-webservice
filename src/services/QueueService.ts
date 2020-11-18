@@ -14,6 +14,7 @@ export default {
   queues,
   add(name: string, data: any) {
     const selectedQueue = this.queues.find(queue => queue.name === name);
+
     return selectedQueue?.bull.add(data);
   },
   process() {

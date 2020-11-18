@@ -71,14 +71,14 @@
   resolved "https://registry.yarnpkg.com/@google-cloud/promisify/-/promisify-2.0.3.tgz#f934b5cdc939e3c7039ff62b9caaf59a9d89e3a8"
   integrity sha512-d4VSA86eL/AFTe5xtyZX+ePUjE8dIFu2T8zmdeNBSa5/kNgXPCx/o/wbFNHAGLJdGnk1vddRuMESD9HbOC8irw==
 
-"@google-cloud/speech@^4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@google-cloud/speech/-/speech-4.1.3.tgz#1ddf3ba0ab20a88407c1d0a1164b98d57eee5d6d"
-  integrity sha512-n7SXEUDdesaCO1oo76LgI96SErF0B87lAuD4oTt0EidxYEGYSW2GDM9H+/FVpfeS1AAhKecSitjYp/vO0eW9DQ==
+"@google-cloud/speech@^4.1.4":
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/@google-cloud/speech/-/speech-4.1.4.tgz#cdc595863f9852b1728d4d3f094280ef144d5da9"
+  integrity sha512-jZ64E5tYe04mUsWA3j0kqC0AeT9OPtTRPJTg4QoGT8O7aAJInTmU06xRpGLN2ZDVRxZAAuaQiMkTWOkXS2eVag==
   dependencies:
     "@google-cloud/common" "^3.0.0"
     "@types/pumpify" "^1.4.1"
-    google-gax "^2.1.0"
+    google-gax "^2.9.2"
     protobufjs "^6.8.6"
     pumpify "^2.0.0"
     stream-events "^1.0.4"
@@ -1630,7 +1630,7 @@ google-auth-library@^6.0.0, google-auth-library@^6.1.1, google-auth-library@^6.1
     jws "^4.0.0"
     lru-cache "^6.0.0"
 
-google-gax@^2.1.0:
+google-gax@^2.9.2:
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-2.9.2.tgz#780b2c0fc031c864007e1e198a9b90c7e946cca0"
   integrity sha512-Pve4osEzNKpBZqFXMfGKBbKCtgnHpUe5IQMh5Ou+Xtg8nLcba94L3gF0xgM5phMdGRRqJn0SMjcuEVmOYu7EBg==
