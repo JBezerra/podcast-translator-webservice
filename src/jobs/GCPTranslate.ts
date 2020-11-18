@@ -1,4 +1,7 @@
 import Translate from '@google-cloud/translate';
+
+import QueueService from '../services/QueueService';
+
 import gcpCredentials from '../config/gcp';
 
 interface Request {
@@ -18,6 +21,11 @@ export default {
 
     const [translation] = await translate.translate(text, target);
     console.log(`Translation: ${translation}`);
+
+    QueueService.add('GCPTextToSpeech', {
+      originalText: translation,
+    });
+
     return translation;
   },
 };

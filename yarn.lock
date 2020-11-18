@@ -109,6 +109,13 @@
     stream-events "^1.0.1"
     xdg-basedir "^4.0.0"
 
+"@google-cloud/text-to-speech@^3.1.2":
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/@google-cloud/text-to-speech/-/text-to-speech-3.1.2.tgz#883bc3220a56b4a253cae86fcbaba4fbf76dfc56"
+  integrity sha512-PzJszO1844MUynozOJMlWqJEyL0F3IBo4XyYHi+ghuFIBiBSfvOBHheTCP8ow/xmTQrCm3QS1Cjv+YhsA0yOIw==
+  dependencies:
+    google-gax "^2.9.2"
+
 "@google-cloud/translate@^6.0.4":
   version "6.0.4"
   resolved "https://registry.yarnpkg.com/@google-cloud/translate/-/translate-6.0.4.tgz#fc2735120e6fc45b0e94aef08f43c4880c2f891d"
