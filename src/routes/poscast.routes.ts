@@ -5,6 +5,7 @@ import { Request, Response, Router } from 'express';
 
 import CheckPodcastFileService from '../services/CheckPodcastFileService';
 import GCPUploadPodcastService from '../services/GCPUploadPodcastService';
+import QueueManagerService from '../services/QueueService';
 
 import uploadConfig from '../config/upload';
 
@@ -41,5 +42,10 @@ podcastRouter.patch(
     }
   },
 );
+
+podcastRouter.get('/', (request: Request, response: Response) => {
+  QueueManagerService.add('GCPSpeechToText', {});
+  response.sendStatus(200);
+});
 
 export default podcastRouter;
