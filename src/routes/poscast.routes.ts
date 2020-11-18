@@ -45,8 +45,7 @@ podcastRouter.patch(
 
 podcastRouter.get('/', (request: Request, response: Response) => {
   QueueManagerService.add('GCPSpeechToText', {
-    gcpBucketFileUrl:
-      'gs://podcast-translator-bucket/afdec394a0efa537c031-audio-teste.m4a',
+    gcpBucketFileUrl: 'gs://podcast-translator-bucket/audio-teste.wav',
   });
   response.sendStatus(200);
 });
