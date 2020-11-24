@@ -12,7 +12,7 @@ export default {
   key: 'GCPSpeechToText',
   async execute({ data }: Request): any {
     const { gcpBucketFileUrl } = data;
-    const client = new speech.SpeechClient({
+    const client = new speech.v1p1beta1.SpeechClient({
       credentials: gcpCredentials,
     });
     const audio = {
@@ -22,7 +22,7 @@ export default {
     const config = {
       encoding: 'LINEAR16',
       sampleRateHertz: 44100,
-      audioChannelCount: 1,
+      audioChannelCount: 2,
       enableAutomaticPunctuation: true,
       languageCode: 'pt-BR',
     };

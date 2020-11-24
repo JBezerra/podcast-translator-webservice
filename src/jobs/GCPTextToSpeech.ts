@@ -1,6 +1,10 @@
 import textToSpeech from '@google-cloud/text-to-speech';
 import fs from 'fs';
+import path from 'path';
 import util from 'util';
+
+import GCPUploadPodcastService from '../services/GCPUploadPodcastService';
+import EmailSenderService from '../services/EmailSenderService';
 
 import gcpCredentials from '../config/gcp';
 
@@ -11,6 +15,10 @@ interface Request {
 export default {
   key: 'GCPTextToSpeech',
   async execute({ data }: Request): any {
+    const recipientEmail = 'jbmn2@cin.ufpe.br';
+    const gcpUploadPodcast = new GCPUploadPodcastService();
+    const emailSender = new EmailSenderService();
+
     const client = new textToSpeech.TextToSpeechClient({
       credentials: gcpCredentials,
     });
@@ -27,6 +35,26 @@ export default {
     const [response] = await client.synthesizeSpeech(request);
     const writeFile = util.promisify(fs.writeFile);
     await writeFile('./tmp/output/output.mp3', response.audioContent, 'binary');
+
     console.log('Audio content written to file: output.mp3');
+
+    const audioFilePath = path.resolve(
+      __dirname,
+      '..',
+      '..',
+      'tmp',
+      'output',
+      'output.mp3',
+    );
+    const fileUrl = await gcpUploadPodcast.execute({ audioFilePath });
+    const email = {
+      sender: 'jbmn2@cin.ufpe.br',
+      recipient: recipientEmail,
+      subject: 'A tradução do seu podcast está pronta!',
+      content: `Aqui está o link para a tradução de seu podcast!\n Link: ${fileUrl}`,
+    };
+    await emailSender.execute(email);
+
+    return emailSender ? 200 : 500;
   },
 };
