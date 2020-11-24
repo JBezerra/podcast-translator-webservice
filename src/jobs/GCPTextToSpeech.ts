@@ -51,7 +51,7 @@ export default {
       sender: 'jbmn2@cin.ufpe.br',
       recipient: recipientEmail,
       subject: 'A tradução do seu podcast está pronta!',
-      content: `Aqui está o link para a tradução de seu podcast!\n Link: ${fileUrl}`,
+      content: `Aqui está o link para a tradução de seu podcast!\nLink: ${fileUrl}`,
     };
     await emailSender.execute(email);
 
