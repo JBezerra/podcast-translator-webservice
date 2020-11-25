@@ -16,6 +16,7 @@ podcastRouter.patch(
   '/upload',
   upload.single('podcast_file'),
   async (request: Request, response: Response) => {
+    console.log(request)
     try {
       const { filename } = request.file;
       const checkUploadPodcast = new CheckPodcastFileService();
@@ -46,6 +47,7 @@ podcastRouter.patch(
 
         QueueService.add('GCPSpeechToText', {
           gcpBucketFileUrl: `gs://podcast-translator-bucket-2/${filename}`,
+          email: request.body.email,
         });
 
         return '';

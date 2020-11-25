@@ -9,20 +9,20 @@ import EmailSenderService from '../services/EmailSenderService';
 import gcpCredentials from '../config/gcp';
 
 interface Request {
-  data: { originalText: string };
+  data: { originalText: string; email: string };
 }
 
 export default {
   key: 'GCPTextToSpeech',
   async execute({ data }: Request): any {
-    const recipientEmail = 'jbmn2@cin.ufpe.br';
+    const { originalText, email: recipientEmail } = data;
+    
     const gcpUploadPodcast = new GCPUploadPodcastService();
     const emailSender = new EmailSenderService();
 
     const client = new textToSpeech.TextToSpeechClient({
       credentials: gcpCredentials,
     });
-    const { originalText } = data;
     const text = originalText;
 
     // Construct the request

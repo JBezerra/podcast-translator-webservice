@@ -5,13 +5,13 @@ import QueueService from '../services/QueueService';
 import gcpCredentials from '../config/gcp';
 
 interface Request {
-  data: { gcpBucketFileUrl: string };
+  data: { gcpBucketFileUrl: string; email: string };
 }
 
 export default {
   key: 'GCPSpeechToText',
   async execute({ data }: Request): any {
-    const { gcpBucketFileUrl } = data;
+    const { gcpBucketFileUrl, email } = data;
     const client = new speech.v1p1beta1.SpeechClient({
       credentials: gcpCredentials,
     });
@@ -42,6 +42,7 @@ export default {
 
     QueueService.add('GCPTranslate', {
       originalText: transcription,
+      email,
     });
 
     return transcription;
